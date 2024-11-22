@@ -32,6 +32,12 @@ class Student(Person):
         else: 
             self.gradeAvg = 0
 
+    def getMentor(self, professor): 
+        if professor == None:
+            print("No mentor assigned") 
+        else:
+            print(professor.name)
+
     def getStudentSummary(self): 
         print(f"Name: {self.name}, Age: {self.age}, Gender: {self.gender}")
         print(f"Student ID: {self.studentID}, Course: {self.course}, Grade Average: {self.gradeAvg}")
@@ -42,11 +48,13 @@ class Professor(Person):
         self.staffID = staffID
         self.department = department
         self.salary = salary
+        self.mentoredStudents = []
     
     def setProfessorDetails(self, staffID, department, salary):
         self.staffID = staffID
         self.department = department
         self.salary = salary
+        self.mentoredStudents = []
     
     def giveFeedback(self, student, feedback):
         print(f"Feedback for {student.name}: {feedback}")
@@ -54,7 +62,14 @@ class Professor(Person):
     def increaseSalary(self, percentage): 
         self.salary *= (1 + int(percentage)/100)
         self.salary = round(self.salary)
-    
+
+    def mentorStudent(self, student): 
+        print(f"Professor {self.name} is now mentoring Student {student.name} on {student.course}")
+        self.mentoredStudents.append(student.name)
+
+    def getMentoredStudents(self): 
+        print(self.mentoredStudents)    
+
     def getProfessorSummary(self): 
         print(f"Name: {self.name}, Age: {self.age}, Gender: {self.gender}")
         print(f"Professor ID: {self.staffID}, Department: {self.department}, Salary: {self.salary}")
@@ -105,3 +120,10 @@ admin.incrementServiceYears()
 daniel.getStudentSummary()
 professor.getProfessorSummary()
 admin.getAdminSummary()
+
+professor.mentorStudent(daniel)
+professor.mentorStudent(daniel)
+professor.mentorStudent(daniel)
+professor.mentorStudent(daniel)
+professor.mentorStudent(daniel)
+professor.getMentoredStudents()
